@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from.models import Todo,Todoform
 
 # Create your views here.
@@ -12,7 +12,11 @@ def HomePage(request):
 
     if request.method == "POST":
         data = request.POST
-        print(data)
+        form = Todoform(data)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+      
         return render(request,"todoapps/index.html")
 
     return render(request,"todoapps/index.html",{"data":content})
