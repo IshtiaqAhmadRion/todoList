@@ -10,4 +10,9 @@ def HomePage(request):
         "form": Todoform,
     }
 
+    if request.method == "POST":
+        data = request.POST
+        print(data)
+        return render(request,"todoapps/index.html")
+
     return render(request,"todoapps/index.html",{"data":content})
