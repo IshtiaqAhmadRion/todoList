@@ -23,4 +23,18 @@ def HomePage(request):
     return render(request,"todoapps/index.html",{"data":content})
 
 def Edittodo(request,id):
+    try:
+        tdata = Todo.objects.get(id=id)
+        tdata.delete()
+        return HttpResponse(f"<h1>Todo is Deleted</h1>")
+    except: 
+        return redirect ("/")
     return HttpResponse(f"<h1>{id}</h1>")
+
+def Updatetodo (request,id):
+    try:
+        tdata = Todo.objects.get(id = id)
+        return HttpResponse(f"{id}")
+    except:
+        return redirect("/")
+    
